@@ -85,10 +85,7 @@ public class IncomeTaxServiceImpl implements IncomeTaxService {
 //            constant.
 
             BigDecimal accumulationSubtract = new BigDecimal(5000).multiply(new BigDecimal(month - minMonth + 1)); // 累计减除费用
-
-
-
-
+            System.out.println("git");
 
         }
         // 应纳税所得额=累计工资-5000*累计月份数-累计专项扣除-累计专项附加扣除
