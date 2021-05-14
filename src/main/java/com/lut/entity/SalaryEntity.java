@@ -44,9 +44,4 @@ public class SalaryEntity implements Serializable {
 	 * 实发工资
 	 */
 	private BigDecimal realSalary;
-	/**
-	 * 当月个人所得税
-	 */
-	private BigDecimal monthTax;
-
 }

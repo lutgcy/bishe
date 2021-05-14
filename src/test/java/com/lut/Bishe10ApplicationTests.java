@@ -2,6 +2,7 @@ package com.lut;
 
 
 import com.lut.entity.SpecialEntity;
+import com.lut.mapper.IncomeTaxMapper;
 import com.lut.mapper.SalaryMapper;
 import com.lut.mapper.SpecialMapper;
 import com.lut.service.impl.IncomeTaxServiceImpl;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +30,16 @@ class Bishe10ApplicationTests {
     private SalaryMapper salaryMapper;
     @Autowired
     private IncomeTaxServiceImpl incomeTaxService;
+    @Autowired
+    private IncomeTaxMapper incomeTaxMapper;
 
+
+    @Test
+    public void test05() {
+        BigDecimal paidTaxMoney = incomeTaxMapper.getPaidTaxMoney(1, 2018, 6);
+        System.out.println(paidTaxMoney);
+
+    }
 
     @Test
     public void test04() {

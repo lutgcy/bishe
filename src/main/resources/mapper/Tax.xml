@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lut.mapper.IncomeTaxMapper">
+    <select id="searchIncomeTax" resultType="map">
+        SELECT employee.emp_id, employee.emp_name, tax_year, tax_month, taxable_income, tax_money FROM income_tax LEFT JOIN employee ON employee.emp_id=income_tax.emp_id
+        <where>
+            <if test="empId!=null and empId!='' ">
+                employee.emp_id=#{empId}
+            </if>
+            <if test="empName!=null and empName!='' ">
+                AND employee.emp_name=#{empName}
+            </if>
+            <if test="yearOnly!=null and yearOnly!='' ">
+                AND tax_year=#{yearOnly}
+            </if>
+            <if test="onlyMonth!=null and onlyMonth!='' ">
+                AND tax_month=#{onlyMonth}
+            </if>
+            <if test="username!=null and username!='' ">
+                AND employee.username=#{username}
+            </if>
+        </where>
+    </select>
+</mapper>

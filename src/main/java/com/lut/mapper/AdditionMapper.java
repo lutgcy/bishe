@@ -2,12 +2,11 @@ package com.lut.mapper;
 
 import com.lut.entity.AddApplyEntity;
 import com.lut.entity.SalaryEntity;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface AdditionMapper {
@@ -20,5 +19,8 @@ public interface AdditionMapper {
 
     @Update("UPDATE addition set ${applyType}=#{applyMoney} WHERE emp_id=#{empId} AND addition_year=#{additionYear} AND addition_month=#{additionMonth}")
     int submitApply(HashMap<String, Object> argMap);
+
+    @Select("SELECT addition_month, child_edu+big_sick+continue_edu+old_man+credit+rent as additionSum FROM addition WHERE emp_id=#{empId} AND addition_year=#{AdditionYear}")
+    List<Map<String, Object>> queryAdditionByEmpIdAndYear(@Param("empId") Integer empId, @Param("AdditionYear") Integer AdditionYear);
 
 }
