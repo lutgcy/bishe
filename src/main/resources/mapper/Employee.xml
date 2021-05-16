@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lut.mapper.EmployeeMapper">
+    <select id="searchEmployees" resultType="map">
+        SELECT emp_id,username,emp_name,emp_sex,emp_email,emp_telephone,emp_address,emp_idnumber,emp_bank,emp_introduction,emp_hiredate,dept_name,post_name,dept.dept_id,post.post_id " +
+        "FROM (employee LEFT JOIN dept ON employee.dept_id = dept.dept_id) LEFT JOIN post ON employee.post_id=post.post_id
+        <where>
+            <if test="empId!=null and empId!='' ">
+                employee.emp_id=#{empId}
+            </if>
+            <if test="empName!=null and empName!='' ">
+                AND employee.emp_name=#{empName}
+            </if>
+            <if test="deptId!=null and deptId!='' ">
+                AND dept.dept_id=#{deptId}
+            </if>
+            <if test="postId!=null and postId!='' ">
+                AND post.post_id=#{postId}
+            </if>
+            <if test="username!=null and username!='' ">
+                AND employee.username=#{username}
+            </if>
+        </where>
+    </select>
+</mapper>

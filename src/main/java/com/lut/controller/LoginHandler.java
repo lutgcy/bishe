@@ -119,10 +119,11 @@ public class LoginHandler {
 
     @ResponseBody
     @GetMapping("/api/hr/info")
-    public Map<String, Object> hrGetInfo() {
+    public Map<String, Object> hrGetInfo(@RequestParam(value = "token", required = false) String token) {
+        String username = JWTUtil.getClaimValueByToken(token, "username");
         Map<String, Object> hashMap = new HashMap<>();
         hashMap.put("roles", new String[]{"hr"});
-        hashMap.put("name", "Human Resource 人力资源");
+        hashMap.put("name", username);
 //        hashMap.put("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
         hashMap.put("avatar", "http://localhost:8080/header-image/head.jpg"); // http://localhost:8080/header-image/admin.jpg
         hashMap.put("introduction", "I am a Human Resource");
@@ -132,9 +133,10 @@ public class LoginHandler {
     @ResponseBody
     @GetMapping("/api/employee/info")
     public Map<String, Object> employeeGetInfo(@RequestParam(value = "token", required = false) String token) {
+        String username = JWTUtil.getClaimValueByToken(token, "username");
         Map<String, Object> hashMap = new HashMap<>();
         hashMap.put("roles", new String[]{"employee"});
-        hashMap.put("name", "Employee");
+        hashMap.put("name", username);
 //        hashMap.put("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
         hashMap.put("avatar", "http://localhost:8080/header-image/head.jpg"); // http://localhost:8080/header-image/admin.jpg
         hashMap.put("introduction", "I am a Employee");

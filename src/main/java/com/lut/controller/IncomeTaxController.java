@@ -21,10 +21,8 @@ public class IncomeTaxController {
 
     @PostMapping("/api/incometax/generate")
     public String generateIncomeTax() {
-
         // 生成数据
         incomeTaxService.generateAllIncomeTax();
-
         return "success";
     }
 

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lut.mapper.SalaryMapper">
+    <insert id="insertInitSalary">
+        INSERT INTO salary (emp_id,salary_year,salary_month,post_salary,base_salary) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.empId},#{item.salaryYear},#{item.salaryMonth},#{item.postSalary},#{item.baseSalary})
+        </foreach>
+    </insert>
+    <select id="queryAllSalaryInfo" resultType="map">
+        SELECT employee.emp_id,employee.emp_name,post.post_name,dept.dept_name,salary_year,salary.salary_month,salary.base_salary,salary.post_salary,
+               special.per_old,special.per_medical,special.per_fire,special.per_house,
+               child_edu,big_sick,continue_edu,old_man,credit,rent,taxable_income,tax_money,real_salary
+        FROM (((((salary LEFT JOIN employee ON employee.emp_id=salary.emp_id)
+            LEFT JOIN post ON employee.post_id=post.post_id) LEFT JOIN dept ON employee.dept_id=dept.dept_id)
+            LEFT JOIN special ON special.emp_id=salary.emp_id AND special.special_year=salary.salary_year AND special.special_month=salary.salary_month)
+            LEFT JOIN addition ON addition.emp_id=salary.emp_id AND addition.addition_year=salary.salary_year AND addition.addition_month=salary.salary_month)
+            LEFT JOIN income_tax ON income_tax.emp_id=salary.emp_id AND income_tax.tax_year=salary.salary_year AND income_tax.tax_month=salary.salary_month
+        <where>
+            <if test="empId!=null and empId!='' ">
+                employee.emp_id=#{empId}
+            </if>
+            <if test="empName!=null and empName!='' ">
+                AND employee.emp_name=#{empName}
+            </if>
+            <if test="yearOnly!=null and yearOnly!='' ">
+                AND salary_year=#{yearOnly}
+            </if>
+            <if test="onlyMonth!=null and onlyMonth!='' ">
+                AND salary_month=#{onlyMonth}
+            </if>
+            <if test="username!=null and username!='' ">
+                AND employee.username=#{username}
+            </if>
+        </where>
+    </select>
+</mapper>

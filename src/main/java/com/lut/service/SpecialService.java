@@ -17,4 +17,6 @@ public interface SpecialService {
 
     int insertSpecial(SpecialEntity specialEntity);
 
+    int insertManySpecials(List<SpecialEntity> list);
+
 }

@@ -59,8 +59,9 @@ public class SpecialController {
             specialEntity.setPerOld(salary.multiply(constant.getPerOldRate()));
             specialEntity.setPerHouse(salary.multiply(constant.getPerHouseRate()));
             specialList.add(specialEntity);
-            specialService.insertSpecial(specialEntity);
+//            specialService.insertSpecial(specialEntity);
         }
+        specialService.insertManySpecials(specialList);
         return "success";
     }
 

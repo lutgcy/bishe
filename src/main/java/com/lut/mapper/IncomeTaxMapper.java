@@ -1,10 +1,7 @@
 package com.lut.mapper;
 
 import com.lut.entity.IncomeTaxEntity;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -24,4 +21,7 @@ public interface IncomeTaxMapper {
     int insertIncomeTax(IncomeTaxEntity incomeTax);
 
     List<Map<String, Object>> searchIncomeTax(HashMap<String, Object> condition);
+
+    @Delete("DELETE FROM income_tax WHERE tax_year=#{year} AND tax_month=#{month}")
+    int deleteIncomeTaxNewMonth(@Param("year") Integer year, @Param("month") Integer month);
 }

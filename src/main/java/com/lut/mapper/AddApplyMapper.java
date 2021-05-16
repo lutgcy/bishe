@@ -31,4 +31,7 @@ public interface AddApplyMapper {
     @Select("SELECT * FROM add_apply WHERE id=#{id}")
     AddApplyEntity selectAddApply(Integer id);
 
+    @Select("SELECT * FROM add_apply WHERE apply_state=1")
+    List<AddApplyEntity> selectAddApplyByState();
+
 }

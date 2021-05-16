@@ -1,6 +1,7 @@
 package com.lut;
 
 
+import com.lut.entity.SalaryEntity;
 import com.lut.entity.SpecialEntity;
 import com.lut.mapper.IncomeTaxMapper;
 import com.lut.mapper.SalaryMapper;
@@ -36,8 +37,6 @@ class Bishe10ApplicationTests {
 
     @Test
     public void test05() {
-        BigDecimal paidTaxMoney = incomeTaxMapper.getPaidTaxMoney(1, 2018, 6);
-        System.out.println(paidTaxMoney);
 
     }
 

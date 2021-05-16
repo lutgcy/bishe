@@ -93,5 +93,9 @@ public class Constant {
     private BigDecimal level6QuickNum;
     private BigDecimal level7QuickNum;
 
+    /**
+     * 基本工资
+     */
+    private BigDecimal baseSalary;
 
 }

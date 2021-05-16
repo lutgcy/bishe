@@ -4,6 +4,7 @@ import com.lut.entity.EmployeeEntity;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,8 @@ import java.util.Map;
 @Repository
 @Mapper
 public interface EmployeeMapper {
+
+    List<Map<String, Object>> searchEmployees(HashMap<String, Object> condition);
 
     @Select("SELECT username, pwd_salt, pwd_hash FROM employee WHERE username = #{username}")
     EmployeeEntity getLoginInfoFromEmployee(@Param("username") String username);

@@ -8,6 +8,7 @@ import com.lut.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +17,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeMapper employeeMapper;
-    
+
+    @Override
+    public PageInfo searchEmployees(HashMap<String, Object> condition, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Map<String, Object>> mapList = employeeMapper.searchEmployees(condition);
+        PageInfo pageInfo = new PageInfo(mapList);
+        return pageInfo;
+    }
+
     @Override
     public PageInfo queryAllEmp(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);

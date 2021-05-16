@@ -1,10 +1,7 @@
 package com.lut.mapper;
 
 import com.lut.entity.SpecialEntity;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +25,12 @@ public interface SpecialMapper {
             "VALUES(#{empId},#{spacialYear},#{specialMonth},#{perHouse},#{compHouse},#{perFire},#{compFire},#{compBirth},#{perMedical},#{compMedical},#{compHurt},#{perOld},#{compOld})")
     int insertSpecial(SpecialEntity specialEntity);
 
+    int insertManySpecials(List<SpecialEntity> list);
+
     @Select("SELECT special_month, per_house+per_fire+per_medical+per_old as perSpecialSum FROM special WHERE emp_id=#{empId} AND special_year=#{specialYear}")
     List<Map<String, Object>> querySpecialByEmpIdAndYear(@Param("empId") Integer empId, @Param("specialYear") Integer specialYear);
+
+    @Delete("DELETE FROM special WHERE special_year=#{year} AND special_month=#{month}")
+    int deleteSpecialNewMonth(@Param("year") Integer year, @Param("month") Integer month);
 
 }

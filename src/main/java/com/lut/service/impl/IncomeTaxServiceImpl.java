@@ -69,7 +69,9 @@ public class IncomeTaxServiceImpl implements IncomeTaxService {
         });
         Integer tempId = Integer.MIN_VALUE;
         Integer tempYear = Integer.MIN_VALUE;
+        LinkedHashMap<Integer, BigDecimal> monthSalary = new LinkedHashMap<>();
         LinkedHashMap<Integer, BigDecimal> monthReduceSalary = new LinkedHashMap<>();
+        LinkedHashMap<Integer, BigDecimal> monthSpecial = new LinkedHashMap<>();
         LinkedHashMap<Integer, BigDecimal> monthReduceSpecial = new LinkedHashMap<>();
         LinkedHashMap<Integer, BigDecimal> monthReduceAddition = new LinkedHashMap<>();
         Integer minMonth = 0;
@@ -80,7 +82,9 @@ public class IncomeTaxServiceImpl implements IncomeTaxService {
             if (!id.equals(tempId) || !year.equals(tempYear)) {
                 tempId = id;
                 tempYear = year;
+                monthSalary.clear();
                 monthReduceSalary.clear();
+                monthSpecial.clear();
                 monthReduceSpecial.clear();
                 monthReduceAddition.clear();
                 List<Map<String, Object>> salaryMapList = salaryMapper.querySalaryByEmpIdAndYear(id, year);
@@ -111,6 +115,7 @@ public class IncomeTaxServiceImpl implements IncomeTaxService {
                 for (Map<String, Object> map : salaryMapList) {
                     Integer salary_month = (Integer) map.get("salary_month");
                     BigDecimal salaryOfMonth = (BigDecimal) map.get("salary");
+                    monthSalary.put(salary_month, salaryOfMonth);
                     salarySum = salarySum.add(salaryOfMonth);
                     monthReduceSalary.put(salary_month, salarySum);
                 }
@@ -119,6 +124,7 @@ public class IncomeTaxServiceImpl implements IncomeTaxService {
                 for (Map<String, Object> map : specialMapList) {
                     Integer special_month = (Integer) map.get("special_month");
                     BigDecimal specialOfMonth = (BigDecimal) map.get("perSpecialSum");
+                    monthSpecial.put(special_month, specialOfMonth);
                     specialSum = specialSum.add(specialOfMonth);
                     monthReduceSpecial.put(special_month, specialSum);
                 }
@@ -134,7 +140,7 @@ public class IncomeTaxServiceImpl implements IncomeTaxService {
             Integer month = salaryItem.getSalaryMonth(); // 当前月份
             // 应纳税所得额=累计工资-5000*累计月份数（累计减除费用）-累计专项扣除-累计专项附加扣除
             BigDecimal accumulationSalary = monthReduceSalary.get(month); // 当前月 年累计工资
-            BigDecimal accumulationSpecial = monthReduceSpecial.get(month); // 当月 年累计专项扣除（五险一金）
+            BigDecimal accumulationSpecial = monthReduceSpecial.get(month); // 当月 年累计 专项扣除（五险一金）
             BigDecimal accumulationAddition = monthReduceAddition.get(month); // 当月 年累计 专项附加扣除
 
             BigDecimal threshold = CONSTANT.getThreshold();  // 个税起征点
@@ -177,14 +183,12 @@ public class IncomeTaxServiceImpl implements IncomeTaxService {
             incomeTaxEntity.setTaxableIncome(taxableIncome);
             incomeTaxEntity.setTaxMoney(currentMonthTaxMoney);
             incomeTaxMapper.insertIncomeTax(incomeTaxEntity);
-//            System.out.println("------------------------------------------------------------------------------------");
-//            System.out.println("paidTaxMoney:" + paidTaxMoney);
-//            System.out.println(taxableIncome);
-//            System.out.println(currentMonthTaxMoney);
-//            System.out.println("------------------------------------------------------------------------------------");
+
+            BigDecimal salary = monthSalary.get(month); // 应发工资
+            BigDecimal special = monthSpecial.get(month);
+            BigDecimal realSalary = salary.subtract(special).subtract(currentMonthTaxMoney);
+            salaryMapper.setRealSalary(realSalary, id, year, month);
         }
-
-
         return 0;
     }
 

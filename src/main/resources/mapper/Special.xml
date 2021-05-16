@@ -3,6 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lut.mapper.SpecialMapper">
+    <insert id="insertManySpecials">
+        INSERT INTO special (emp_id,special_year,special_month,per_house,comp_house,per_fire,comp_fire,comp_birth,per_medical,comp_medical,comp_hurt,per_old,comp_old) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.empId},#{item.spacialYear},#{item.specialMonth},#{item.perHouse},#{item.compHouse},#{item.perFire},#{item.compFire},#{item.compBirth},#{item.perMedical},#{item.compMedical},#{item.compHurt},#{item.perOld},#{item.compOld})
+        </foreach>
+    </insert>
     <select id="searchSpecials" resultType="map">
         SELECT special.emp_id,employee.emp_name,special_year,special_month,per_house,comp_house,per_fire,comp_fire,comp_birth,per_medical,comp_medical,comp_hurt,per_old,comp_old FROM special LEFT JOIN employee ON special.emp_id=employee.emp_id
         <where>

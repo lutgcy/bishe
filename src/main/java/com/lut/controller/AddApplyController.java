@@ -3,7 +3,6 @@ package com.lut.controller;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import com.lut.entity.AddApplyEntity;
-import com.lut.entity.AdditionEntity;
 import com.lut.service.impl.AddApplyServiceImpl;
 import com.lut.service.impl.AdditionServiceImpl;
 import com.lut.service.impl.EmployeeServiceImpl;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;

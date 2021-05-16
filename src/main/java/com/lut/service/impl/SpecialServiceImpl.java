@@ -43,4 +43,9 @@ public class SpecialServiceImpl implements SpecialService {
         PageInfo pageInfo = new PageInfo(searchSpecials);
         return pageInfo;
     }
+
+    @Override
+    public int insertManySpecials(List<SpecialEntity> list) {
+        return specialMapper.insertManySpecials(list);
+    }
 }
