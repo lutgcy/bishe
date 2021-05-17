@@ -6,6 +6,7 @@ import com.lut.entity.HumanResource;
 import com.lut.mapper.AdminMapper;
 import com.lut.mapper.EmployeeMapper;
 import com.lut.mapper.HumanResourceMapper;
+import com.lut.utils.Constant;
 import com.lut.utils.JWTUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,8 +28,75 @@ public class LoginHandler {
     private HumanResourceMapper humanResourceMapper;
     @Autowired
     private EmployeeMapper employeeMapper;
+    @Autowired
+    private Constant CONSTANT;
 
     Logger logger = LoggerFactory.getLogger(LoginHandler.class);
+
+
+    @ResponseBody
+    @PostMapping("/api/password/update")
+    public String updatePassword(@RequestBody Map<String, String> map, HttpServletResponse response) {
+        String oldPasswordSHA256 = map.get("oldPassword");
+        String newPasswordSHA256 = map.get("newPassword");
+        String token = map.get("token");
+
+        String roleType = JWTUtil.getClaimValueByToken(token, "roleType");
+        String username = JWTUtil.getClaimValueByToken(token, "username");
+
+        if (roleType.equals("admin")) {
+            AdminEntity adminByUserName = adminMapper.getAdminByUserName(username);
+            String pwdHash = adminByUserName.getPwdHash();
+            if (oldPasswordSHA256.equals(pwdHash)) {
+                adminMapper.updatePassword(newPasswordSHA256, username);
+            } else {
+                return "error";
+            }
+        } else if (roleType.equals("hr")) {
+            String pwdHash = humanResourceMapper.getHumanResourceByUserName(username).getPwdHash();
+            if (oldPasswordSHA256.equals(pwdHash)) {
+                humanResourceMapper.updatePassword(newPasswordSHA256, username);
+            } else {
+                return "error";
+            }
+        } else if (roleType.equals("employee")) {
+            String pwdHash = employeeMapper.getLoginInfoFromEmployee(username).getPwdHash();
+            if (oldPasswordSHA256.equals(pwdHash)) {
+                employeeMapper.updatePassword(newPasswordSHA256, username);
+            } else {
+                return "error";
+            }
+        }
+        return "success";
+    }
+
+    @ResponseBody
+    @PostMapping("/api/password/reset/hr")
+    public String resetHrPassword(@RequestBody Map<String, String> map, HttpServletResponse response) {
+        try {
+            map.values().forEach(value -> {
+                humanResourceMapper.resetPwd(CONSTANT.getDefaultPassword(), value);
+            });
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            response.setStatus(500);
+        }
+        return "success";
+    }
+
+    @ResponseBody
+    @PostMapping("/api/password/reset/emp")
+    public String resetEmpPassword(@RequestBody Map<String, String> map, HttpServletResponse response) {
+        try {
+            map.values().forEach(value -> {
+                employeeMapper.resetPwd(CONSTANT.getDefaultPassword(), value);
+            });
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            response.setStatus(500);
+        }
+        return "success";
+    }
 
     @ResponseBody
     @RequestMapping(path = "/api/admin/login", method = RequestMethod.POST)
@@ -110,8 +178,7 @@ public class LoginHandler {
     public Map<String, Object> getInfo() {
         Map<String, Object> hashMap = new HashMap<>();
         hashMap.put("roles", new String[]{"admin"});
-        hashMap.put("name", "超级管理员");
-        //        hashMap.put("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+        hashMap.put("name", "管理员");
         hashMap.put("avatar", "http://localhost:8080/header-image/head.jpg"); // http://localhost:8080/header-image/admin.jpg
         hashMap.put("introduction", "I am a super administrator");
         return hashMap;
@@ -124,8 +191,7 @@ public class LoginHandler {
         Map<String, Object> hashMap = new HashMap<>();
         hashMap.put("roles", new String[]{"hr"});
         hashMap.put("name", username);
-//        hashMap.put("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
-        hashMap.put("avatar", "http://localhost:8080/header-image/head.jpg"); // http://localhost:8080/header-image/admin.jpg
+        hashMap.put("avatar", "http://localhost:8080/header-image/head.jpg"); // "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif"
         hashMap.put("introduction", "I am a Human Resource");
         return hashMap;
     }
@@ -137,7 +203,6 @@ public class LoginHandler {
         Map<String, Object> hashMap = new HashMap<>();
         hashMap.put("roles", new String[]{"employee"});
         hashMap.put("name", username);
-//        hashMap.put("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
         hashMap.put("avatar", "http://localhost:8080/header-image/head.jpg"); // http://localhost:8080/header-image/admin.jpg
         hashMap.put("introduction", "I am a Employee");
         return hashMap;

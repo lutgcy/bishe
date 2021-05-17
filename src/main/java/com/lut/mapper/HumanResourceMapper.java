@@ -23,4 +23,10 @@ public interface HumanResourceMapper {
 
     @Update("UPDATE hr SET hr_name=#{hrName}, hr_sex=#{hrSex}, hr_telephone=#{hrTelephone}, hr_email=#{hrEmail}, hr_address=#{hrAddress}, hr_introduction=#{hrIntroduction} WHERE username=#{username}")
     int updateHr(HumanResource hr);
+
+    @Update("UPDATE hr SET pwd_hash = #{newPasswordSHA256} WHERE username=#{username}")
+    int updatePassword(@Param("newPasswordSHA256")String newPasswordSHA256, @Param("username") String username);
+
+    @Update("UPDATE hr SET pwd_hash = #{defaultPassword} WHERE username=#{username}")
+    int resetPwd(@Param("defaultPassword") String defaultPassword, @Param("username") String username);
 }

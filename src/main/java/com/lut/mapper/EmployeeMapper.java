@@ -35,4 +35,10 @@ public interface EmployeeMapper {
 
     @Select("SELECT emp_id FROM employee WHERE username=#{username}")
     Integer getEmpIdFormUsername(String username);
+
+    @Update("UPDATE employee SET pwd_hash = #{newPasswordSHA256} WHERE username=#{username}")
+    int updatePassword(@Param("newPasswordSHA256")String newPasswordSHA256, @Param("username") String username);
+
+    @Update("UPDATE employee SET pwd_hash = #{defaultPassword} WHERE emp_id=#{empId}")
+    int resetPwd(@Param("defaultPassword") String defaultPassword, @Param("empId") String empId);
 }

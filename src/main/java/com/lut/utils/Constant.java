@@ -2,7 +2,6 @@ package com.lut.utils;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +13,11 @@ import java.math.BigDecimal;
 @PropertySource("classpath:constant.properties")
 @Data
 public class Constant {
+
+    /**
+     * 默认密码
+     */
+    private String defaultPassword;
 
     /**
      * 住房公积金---个人
