@@ -129,7 +129,6 @@ public class LoginHandler {
         String pwdSHA256 = map.get("pwdSHA256");
 
         HumanResource humanResourceByUserName = humanResourceMapper.getHumanResourceByUserName(username);
-        System.out.println(humanResourceByUserName);
 
         Map<String, String> hashMap = new HashMap<>();
         if (humanResourceByUserName !=null && humanResourceByUserName.getPwdHash().equals(pwdSHA256)) {

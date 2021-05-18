@@ -48,7 +48,6 @@ public class SalaryServiceImpl implements SalaryService {
     public int initNextMonthSalary() {
         // 查询到最大 年份 月份+1>12 则year+1
         Map<String, Integer> nextMonthDate = salaryMapper.getNextMonthDate();
-        System.out.println(nextMonthDate);
         Integer salary_year = nextMonthDate.get("salary_year");
         Integer salary_month = nextMonthDate.get("salary_month");
         if (salary_month == 12) {

@@ -143,8 +143,6 @@ public class AddApplyController {
                              HttpServletRequest request) throws IOException {
 
         AddApplyEntity JSONApplyEntity = JSON.parseObject(applyEntity, AddApplyEntity.class);
-        System.out.println(JSONApplyEntity);
-        System.out.println(file.getOriginalFilename());
 
         // 修改记录
         addApplyService.alterApply(JSONApplyEntity);
