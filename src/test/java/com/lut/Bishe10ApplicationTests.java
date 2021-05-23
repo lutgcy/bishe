@@ -3,6 +3,7 @@ package com.lut;
 
 import com.lut.entity.SalaryEntity;
 import com.lut.entity.SpecialEntity;
+import com.lut.mapper.EmployeeMapper;
 import com.lut.mapper.IncomeTaxMapper;
 import com.lut.mapper.SalaryMapper;
 import com.lut.mapper.SpecialMapper;
@@ -33,10 +34,16 @@ class Bishe10ApplicationTests {
     private IncomeTaxServiceImpl incomeTaxService;
     @Autowired
     private IncomeTaxMapper incomeTaxMapper;
+    @Autowired
+    private EmployeeMapper employeeMapper;
 
 
     @Test
     public void test05() {
+        List<Map<String, Object>> mapList = employeeMapper.countPostRate();
+        for (Map<String, Object> map : mapList) {
+            System.out.println(map);
+        }
 
     }
 

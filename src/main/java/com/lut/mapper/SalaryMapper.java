@@ -11,6 +11,15 @@ import java.util.Map;
 @Mapper
 public interface SalaryMapper {
 
+    @Select("SELECT salary_month AS 'month',ROUND(SUM(post_salary)/COUNT(post_salary),2) AS avgSalary FROM salary GROUP BY salary_month")
+    List<Map<String, Object>> getAVGSalary();
+
+    @Select("SELECT tax_month AS 'month',ROUND(SUM(tax_money)/COUNT(tax_money),2) AS avgTax FROM income_tax GROUP BY tax_month")
+    List<Map<String, Object>> getAVGTax();
+
+    @Select("SELECT tax_month AS 'month',ROUND(SUM(taxable_income)/COUNT(taxable_income),2) AS avgIncome FROM income_tax GROUP BY tax_month")
+    List<Map<String, Object>> getAVGIncome();
+
     //    @Insert("INSERT INTO salary (emp_id,salary_year,salary_month,post_salary,base_salary) VALUES(#{},#{},#{},#{},#{})")
     int insertInitSalary(List<SalaryEntity> list);
 

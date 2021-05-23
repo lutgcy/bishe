@@ -13,6 +13,12 @@ import java.util.Map;
 @Mapper
 public interface EmployeeMapper {
 
+    @Select("SELECT post_name AS postName, COUNT(*) AS count FROM employee LEFT JOIN post ON employee.post_id=post.post_id GROUP BY post.post_id ORDER BY count DESC")
+    List<Map<String, Object>> countPostRate();
+
+    @Select("SELECT INTERVAL(avgSalary,17000,18000,19000,20000,21000,22000,23000,100000) num,COUNT(1) count FROM(SELECT  SUM(post_salary+base_salary)/count(1) as avgSalary FROM salary GROUP BY emp_id) as aaa GROUP BY INTERVAL(avgSalary,17000,18000,19000,20000,21000,22000,23000,100000)")
+    List<Map<String, Object>> salaryInterval();
+
     List<Map<String, Object>> searchEmployees(HashMap<String, Object> condition);
 
     @Select("SELECT username, pwd_salt, pwd_hash FROM employee WHERE username = #{username}")
