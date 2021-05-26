@@ -21,7 +21,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 //                .excludePathPatterns("/vue-element-admin/user/login")
 //                .excludePathPatterns("/api/hr/login")
 //                .excludePathPatterns("/api/employee/login")
-//                .excludePathPatterns("/vue-element-admin/user/logout")
+                .excludePathPatterns("/api/logout")
                 .excludePathPatterns("/*/*/login")
                 .excludePathPatterns("/*.*")
                 .excludePathPatterns("/*/*.*");

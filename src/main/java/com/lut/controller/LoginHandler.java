@@ -173,11 +173,12 @@ public class LoginHandler {
 
 
     @ResponseBody
-    @GetMapping("/api/admin//info")
-    public Map<String, Object> getInfo() {
+    @GetMapping("/api/admin/info")
+    public Map<String, Object> getInfo(@RequestParam(value = "token", required = false) String token) {
+        String username = JWTUtil.getClaimValueByToken(token, "username");
         Map<String, Object> hashMap = new HashMap<>();
         hashMap.put("roles", new String[]{"admin"});
-        hashMap.put("name", "管理员");
+        hashMap.put("name", username);
         hashMap.put("avatar", "http://localhost:8080/header-image/head.jpg"); // http://localhost:8080/header-image/admin.jpg
         hashMap.put("introduction", "I am a super administrator");
         return hashMap;

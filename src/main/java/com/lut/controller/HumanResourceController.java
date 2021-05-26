@@ -2,7 +2,9 @@ package com.lut.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.lut.entity.HumanResource;
+import com.lut.mapper.HumanResourceMapper;
 import com.lut.service.impl.HumanResourceServiceImpl;
+import com.lut.utils.JWTUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ public class HumanResourceController {
 
     @Autowired
     private HumanResourceServiceImpl humanResourceService;
+    @Autowired
+    HumanResourceMapper humanResourceMapper;
     private Logger logger = LoggerFactory.getLogger(HumanResource.class);
 
 
@@ -25,6 +29,14 @@ public class HumanResourceController {
     public PageInfo listHr(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
         return humanResourceService.queryAllHR(pageNum, pageSize);
     }
+
+    @GetMapping("/api/hr/username")
+    public HumanResource returnHrByUsername(@RequestParam("username") String username) {
+
+        return humanResourceMapper.getHrInfoByUsername(username);
+    }
+
+
 
     @PostMapping("/api/hr")
     public int insertHr(@RequestBody HumanResource hr, HttpServletResponse response) {

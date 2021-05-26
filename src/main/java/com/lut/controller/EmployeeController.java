@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import com.lut.entity.EmployeeEntity;
 import com.lut.entity.HumanResource;
+import com.lut.mapper.EmployeeMapper;
 import com.lut.service.impl.EmployeeServiceImpl;
 import com.lut.utils.JWTUtil;
 import org.slf4j.Logger;
@@ -22,7 +23,15 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeServiceImpl employeeService;
+    @Autowired
+    private EmployeeMapper employeeMapper;
     private Logger logger = LoggerFactory.getLogger(EmployeeController.class);
+
+    @GetMapping("/api/employee/username")
+    public EmployeeEntity returnEmployeeByUsername(@RequestParam("username") String username) {
+
+        return employeeMapper.getEmployeeInfoByUsername(username);
+    }
 
     @GetMapping("/api/employee/search")
     public PageInfo listSearchEmployee(@RequestParam("condition") String condition, @RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize, HttpServletRequest request) {

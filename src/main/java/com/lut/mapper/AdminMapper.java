@@ -15,5 +15,8 @@ public interface AdminMapper {
     public AdminEntity getAdminByUserName(@Param("username") String username);
 
     @Update("UPDATE admin SET pwd_hash = #{newPasswordSHA256} WHERE username=#{username}")
-    int updatePassword(@Param("newPasswordSHA256")String newPasswordSHA256, @Param("username") String username);
+    int updatePassword(@Param("newPasswordSHA256") String newPasswordSHA256, @Param("username") String username);
+
+    @Update("UPDATE admin SET username=#{newUsername} WHERE username=#{oldUsername}")
+    int updateUsername(@Param("newUsername") String newUsername, @Param("oldUsername") String oldUsername);
 }

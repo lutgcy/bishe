@@ -1,6 +1,7 @@
 package com.lut.mapper;
 
 import com.lut.entity.EmployeeEntity;
+import com.lut.entity.HumanResource;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +13,9 @@ import java.util.Map;
 @Repository
 @Mapper
 public interface EmployeeMapper {
+
+    @Select("SELECT * FROM employee WHERE username = #{username}")
+    EmployeeEntity getEmployeeInfoByUsername(@Param("username") String username);
 
     @Select("SELECT post_name AS postName, COUNT(*) AS count FROM employee LEFT JOIN post ON employee.post_id=post.post_id GROUP BY post.post_id ORDER BY count DESC")
     List<Map<String, Object>> countPostRate();

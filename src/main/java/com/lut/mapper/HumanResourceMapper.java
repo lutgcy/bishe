@@ -9,6 +9,9 @@ import java.util.List;
 @Mapper
 public interface HumanResourceMapper {
 
+    @Select("SELECT * FROM hr WHERE username = #{username}")
+    HumanResource getHrInfoByUsername(@Param("username") String username);
+
     @Select("SELECT username, pwd_salt, pwd_hash FROM hr WHERE username = #{username}")
     HumanResource getHumanResourceByUserName(@Param("username") String username);
 
