@@ -1,16 +1,14 @@
 package com.lut.mapper;
 
 import com.lut.entity.EmployeeEntity;
-import com.lut.entity.HumanResource;
 import org.apache.ibatis.annotations.*;
-import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 
-@Repository
+//@Repository
 @Mapper
 public interface EmployeeMapper {
 

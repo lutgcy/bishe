@@ -100,7 +100,7 @@ public class LoginHandler {
 
     @ResponseBody
     @RequestMapping(path = "/api/admin/login", method = RequestMethod.POST)
-    public Map<String, String> login(@RequestBody Map<String, String> map, HttpServletResponse response, HttpServletRequest request) {
+    public Map<String, String> login(@RequestBody Map<String, String> map) {
 
         String username = map.get("username");
         String pwdSHA256 = map.get("pwdSHA256");
@@ -123,7 +123,7 @@ public class LoginHandler {
 
     @ResponseBody
     @RequestMapping(path = "/api/hr/login", method = RequestMethod.POST)
-    public Map<String, String> hrLogin(@RequestBody Map<String, String> map, HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest) {
+    public Map<String, String> hrLogin(@RequestBody Map<String, String> map) {
 
         String username = map.get("username");
         String pwdSHA256 = map.get("pwdSHA256");
