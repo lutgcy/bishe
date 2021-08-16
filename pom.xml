@@ -12,7 +12,7 @@
     <artifactId>bishe-1-0</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>bishe-1-0</name>
-    <description>Demo project for Spring Boot</description>
+    <description>毕业设计</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
