@@ -1,0 +1,23 @@
+2021-09-12 02:42:38.216  INFO 14164 --- [main] com.lut.BiShe10Application               : Starting BiShe10Application using Java 1.8.0_211 on Sprinkle with PID 14164 (D:\All_workspace\SpringBootProjects\bishe-1-0\target\classes started by Sprinkle in D:\All_workspace\SpringBootProjects\bishe-1-0)
+2021-09-12 02:42:38.224  INFO 14164 --- [main] com.lut.BiShe10Application               : No active profile set, falling back to default profiles: default
+2021-09-12 02:42:39.720  INFO 14164 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-09-12 02:42:39.723  INFO 14164 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-09-12 02:42:39.814  INFO 14164 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 74 ms. Found 0 Redis repository interfaces.
+2021-09-12 02:42:40.151  INFO 14164 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'threadConfig' of type [com.lut.config.ThreadConfig$$EnhancerBySpringCGLIB$$117ffa64] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-09-12 02:42:40.497  INFO 14164 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8333 (http)
+2021-09-12 02:42:40.507  INFO 14164 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-09-12 02:42:40.508  INFO 14164 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.44]
+2021-09-12 02:42:40.655  INFO 14164 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-09-12 02:42:40.655  INFO 14164 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2354 ms
+2021-09-12 02:42:41.846  INFO 14164 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-09-12 02:42:41.916  INFO 14164 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2021-09-12 02:42:42.472  INFO 14164 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8333 (http) with context path ''
+2021-09-12 02:42:42.649  INFO 14164 --- [main] com.lut.BiShe10Application               : Started BiShe10Application in 5.082 seconds (JVM running for 7.454)
+2021-09-12 02:43:20.542  INFO 14164 --- [http-nio-8333-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-09-12 02:43:20.543  INFO 14164 --- [http-nio-8333-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-09-12 02:43:20.547  INFO 14164 --- [http-nio-8333-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2021-09-12 02:43:20.589  WARN 14164 --- [http-nio-8333-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required int parameter 'pageNum' is not present]
+2021-09-12 02:44:43.599  WARN 14164 --- [http-nio-8333-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required String parameter 'username' is not present]
+2021-09-12 02:48:49.633  WARN 14164 --- [http-nio-8333-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required int parameter 'pageNum' is not present]
+2021-09-12 02:55:27.875  WARN 14164 --- [http-nio-8333-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required int parameter 'pageNum' is not present]
+2021-09-12 02:56:51.558  WARN 14164 --- [http-nio-8333-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required int parameter 'pageNum' is not present]
