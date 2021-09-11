@@ -7,8 +7,10 @@ import com.lut.mapper.EmployeeMapper;
 import com.lut.mapper.IncomeTaxMapper;
 import com.lut.mapper.SalaryMapper;
 import com.lut.mapper.SpecialMapper;
+import com.lut.service.AsyncTaskService;
 import com.lut.service.impl.IncomeTaxServiceImpl;
 import com.lut.utils.Constant;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,6 +24,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 
+@DisplayName("who am i")
 @SpringBootTest
 class Bishe10ApplicationTests {
 
@@ -36,6 +39,18 @@ class Bishe10ApplicationTests {
     private IncomeTaxMapper incomeTaxMapper;
     @Autowired
     private EmployeeMapper employeeMapper;
+
+
+    @Autowired
+    private AsyncTaskService asyncTaskService;
+
+    @Test
+    @DisplayName("thread")
+    public void threadTest() {
+        for (int i = 0; i < 20; i++) {
+            asyncTaskService.executeAsyncTask(i);
+        }
+    }
 
 
     @Test
