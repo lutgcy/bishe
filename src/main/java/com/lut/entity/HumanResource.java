@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  *
  * @author gcy
@@ -31,6 +33,7 @@ public class HumanResource {
     /**
      * 姓名
      */
+    @NotBlank(message = "hrName不能为空")
     private String hrName;
     /**
      * 性别

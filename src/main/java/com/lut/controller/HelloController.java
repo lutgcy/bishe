@@ -22,11 +22,11 @@ public class HelloController {
 
     @ResponseBody
     @GetMapping("/hello")
-    public String hello(@RequestBody EmployeeEntity emp, BindingResult bindingResult) {
+    public String hello() {
 //        for (int i = 0; i < 10; i++) {
 //            System.out.println(i);
 //        }
-        log.error(bindingResult.toString());
-        return "Hello " + emp;
+//        log.error(bindingResult.toString());
+        return "Hello ";
     }
 }
